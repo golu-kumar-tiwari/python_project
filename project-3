@@ -1,0 +1,48 @@
+while True:
+    print("\n UNIT CONVERTER of this:")
+    print("1. Kg to Pound")
+    print("2. Hour to Minutes")
+    print("3. Miles to Kilometer")
+    print("4. Centimeter to Meter")
+    print("5. Celsius to Fahrenheit")
+    print("6. Liter to Milliliter")
+    print("7. Exit")
+
+    ch = input("Enter your choice: ")
+
+    if ch == "1":
+        kg = float(input("Enter value in kg: "))
+        pound = kg * 2.20462
+        print("Pounds =", pound)
+
+    elif ch == "2":
+        hr = float(input("Enter hours: "))
+        minutes = hr * 60
+        print("Minutes =", minutes)
+
+    elif ch == "3":
+        miles = float(input("Enter miles: "))
+        km = miles * 1.60934
+        print("Kilometers =", km)
+
+    elif ch == "4":
+        cm = float(input("Enter centimeters: "))
+        meter = cm / 100
+        print("Meters =", meter)
+
+    elif ch == "5":
+        c = float(input("Enter temperature in Celsius: "))
+        f = (c * 9/5) + 32
+        print("Fahrenheit =", f)
+
+    elif ch == "6":
+        l = float(input("Enter liters: "))
+        ml = l * 1000
+        print("Milliliters =", ml)
+
+    elif ch == "7":
+        print("Thank you! Converter closed.")
+        break
+
+    else:
+        print("Invalid option.")
