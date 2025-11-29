@@ -1,0 +1,21 @@
+import streamlit as st
+import google.generativeai as genai
+
+st.set_page_config(page_title="YP Bot", page_icon="", layout="centered")
+
+api_key = "YOUR_API_KEY"
+genai.configure(api_key=api_key)
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+st.title("🤖 YP Bot")
+
+user_input = st.text_input("Ask something...")
+
+if st.button("Submit"):
+    if user_input.strip() == "":
+        st.warning("Please type something!")
+    else:
+        response = model.generate_content(user_input)
+        st.success("YP Bot Response:")
+        st.write(response.text)
