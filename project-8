@@ -1,18 +1,46 @@
+pip install google-generativeai
+import google.generativeai as genai
 import streamlit as st
 import google.generativeai as genai
 
 st.set_page_config(page_title="YP Bot", page_icon="", layout="centered")
 
-api_key = "YOUR_API_KEY"
-genai.configure(api_key=api_key)
 
+key = api_key
+genai.configure(api_key=key)
 model = genai.GenerativeModel("gemini-2.5-flash")
 
-st.title("🤖 YP Bot")
+st.markdown("""
+    <style>
+    body {
+        background-color: #0a0f24;
+    }
+    .stButton>button {
+        background-color:#0033A0;
+        color:white;
+        border-radius:5px;
+        padding:5px 10px;
+    }
+    .stTextInput>div>input {
+        background-color:#0a1a3a;
+        color:white;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-user_input = st.text_input("Ask something...")
 
-if st.button("Submit"):
+st.sidebar.title("Menu")
+st.sidebar.write("Home")
+st.sidebar.write("About")
+st.sidebar.write("Contact")
+
+
+st.title("YP Bot")
+st.write("Ask anything to the bot below")
+
+user_input = st.text_input("Enter your question:")
+
+if st.button("Send"):
     if user_input.strip() == "":
         st.warning("Please type something!")
     else:
