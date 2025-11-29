@@ -1,0 +1,45 @@
+print("MOVIE TICKET BOOKING")
+
+movies = ["1. Avengers", "2. Pathaan", "3. KGF 2", "4. Exit"]
+
+for m in movies:
+    print(m)
+
+while True:
+    choice = input("Select movie number: ")
+
+    if choice == "1":
+        movie = "Avengers"
+        price = 250
+
+    elif choice == "2":
+        movie = "Pathaan"
+        price = 200
+
+    elif choice == "3":
+        movie = "KGF 2"
+        price = 300
+
+    elif choice == "4":
+        print("Thank you! Visit again.")
+        break
+
+    else:
+        print("Invalid choice, try again.")
+        continue
+
+    seats = int(input("How many tickets you want? "))
+
+    total = seats * price
+
+    print("\n BOOKING CONFIRMED")
+    print("Movie:", movie)
+    print("Tickets:", seats)
+    print("Price per ticket:", price)
+    print("Total amount:", total)
+   
+
+    another = input("Book another movie if you want? (yes/no): ")
+    if another.lower() != "yes":
+        print("Thank you! please Enjoy your movie.")
+        break
