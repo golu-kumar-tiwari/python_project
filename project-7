@@ -1,0 +1,81 @@
+import streamlit as st
+import random
+
+st.set_page_config(page_title="Mood → Music", layout="centered")
+st.title("Mood - Music")
+st.write("Pick a mood and get song suggestions")
+
+# simple mood map: (title, artist, youtube url)
+songs = {
+    "Happy": [
+        ("Happy", "Pharrell Williams", "https://www.youtube.com/watch?v=ZbZSe6N_BXs"),
+        ("Can't Stop the Feeling!", "Justin Timberlake", "https://www.youtube.com/watch?v=ru0K8uYEZWw"),
+        ("Good as Hell", "Lizzo", "https://www.youtube.com/watch?v=IaZgLhV3n8M")
+    ],
+    "Sad": [
+        ("Someone Like You", "Adele", "https://www.youtube.com/watch?v=hLQl3WQQoQ0"),
+        ("When I Was Your Man", "Bruno Mars", "https://www.youtube.com/watch?v=ekzHIouo8Q4"),
+        ("Skinny Love", "Bon Iver", "https://www.youtube.com/watch?v=ssdgFoHLwnk")
+    ],
+    "Focus": [
+        ("Weightless", "Marconi Union", "https://www.youtube.com/watch?v=UfcAVejslrU"),
+        ("Time (Instrumental)", "Hans Zimmer", "https://www.youtube.com/watch?v=Z0kGAz6HYM8"),
+        ("LoFi Study Mix", "LoFi", "https://www.youtube.com/watch?v=5qap5aO4i9A")
+    ],
+    "Chill": [
+        ("Sunflower", "Post Malone, Swae Lee", "https://www.youtube.com/watch?v=ApXoWvfEYVU"),
+        ("Better Together", "Jack Johnson", "https://www.youtube.com/watch?v=u57d4_b_YgI"),
+        ("Ocean Eyes", "Billie Eilish", "https://www.youtube.com/watch?v=viimfQi_pUw")
+    ],
+    "Energetic": [
+        ("Eye of the Tiger", "Survivor", "https://www.youtube.com/watch?v=btPJPFnesV4"),
+        ("Believer", "Imagine Dragons", "https://www.youtube.com/watch?v=7wtfhZwyrcc"),
+        ("Stronger", "Kanye West", "https://www.youtube.com/watch?v=PsO6ZnUZI0g")
+    ]
+}
+
+
+emoji_map = {
+    "Happy": "😄",
+    "Sad": "😢",
+    "Focus": "🧠",
+    "Chill": "😌",
+    "Energetic": "⚡"
+}
+
+# UI: mood buttons
+st.write("### Choose mood")
+cols = st.columns(5)
+mood_keys = list(songs.keys())
+for i, c in enumerate(cols):
+    if c.button(mood_keys[i]):
+        st.session_state.mood = mood_keys[i]
+
+
+if "mood" not in st.session_state:
+    st.session_state.mood = "Happy"
+
+m = st.session_state.mood
+st.markdown(f"## {m}  {emoji_map.get(m,'')}", unsafe_allow_html=True)
+
+
+st.write("### Playlist")
+for title, artist, url in songs[m]:
+    st.markdown(f"- **{title}** — *{artist}*  [YouTube]({url})")
+
+
+if st.button("Surprise me!"):
+    t, a, u = random.choice(songs[m])
+    st.success(f"Play: **{t}** — *{a}*")
+    st.video(u)
+
+
+st.write("---")
+st.write("Click a song to preview (paste the link below and press Play)")
+
+play_url = st.text_input("Paste YouTube link here")
+if st.button("Play") and play_url.strip():
+    st.video(play_url.strip())
+
+st.write("")
+st.caption("Prototype — session only. For real app add Spotify/YouTube API and save favorites.")
